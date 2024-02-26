@@ -1,0 +1,11 @@
+
+.label1{
+    background: blue;
+    color: black;
+}
+.button{
+  -fx-background-color:blue;
+}
+.button:hover{
+    -fx-background-color: white;
+}
