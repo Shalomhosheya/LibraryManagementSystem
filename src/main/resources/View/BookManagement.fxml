@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,7 +15,7 @@
    <children>
       <AnchorPane fx:id="Anchor1" layoutX="488.0" prefHeight="550.0" prefWidth="500.0">
          <children>
-            <TableView fx:id="tableBookBrowers" prefHeight="550.0" prefWidth="500.0" stylesheets="@../Assets/CSS/MainformDesign.css">
+            <TableView fx:id="tableBookBrowers" layoutY="-2.0" prefHeight="550.0" prefWidth="500.0" stylesheets="@../Assets/CSS/MainformDesign.css">
               <columns>
                 <TableColumn fx:id="tableBookBrowers_col_ID" prefWidth="76.0" text="Book ID" />
                 <TableColumn fx:id="tableBookBrowers_col_title" prefWidth="109.60003662109375" text="Title" />
@@ -26,25 +28,48 @@
       </AnchorPane>
       <AnchorPane fx:id="Anchor11" prefHeight="555.0" prefWidth="487.0">
          <children>
+            <ImageView fitHeight="555.0" fitWidth="487.0">
+               <image>
+                  <Image url="@../Assets/Pictures/(11_27_2020).jpeg" />
+               </image>
+            </ImageView>
             <Label layoutX="153.0" layoutY="29.0" prefHeight="18.0" prefWidth="190.0" text="Book Management ">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="22.0" layoutY="86.0" prefHeight="18.0" prefWidth="92.0" text="Book ID" />
+            <Label layoutX="54.0" layoutY="87.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Book ID" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="bookid_txt" layoutX="129.0" layoutY="83.0" prefHeight="26.0" prefWidth="310.0" />
-            <Label layoutX="22.0" layoutY="128.0" prefHeight="18.0" prefWidth="92.0" text="Title" />
             <TextField fx:id="title_txt" layoutX="129.0" layoutY="125.0" prefHeight="26.0" prefWidth="310.0" />
-            <Label layoutX="22.0" layoutY="179.0" prefHeight="18.0" prefWidth="92.0" text="Author's name:" />
             <TextField fx:id="author_txt" layoutX="129.0" layoutY="176.0" prefHeight="26.0" prefWidth="310.0" />
-            <Label layoutX="22.0" layoutY="225.0" prefHeight="18.0" prefWidth="92.0" text="Genre Type:" />
             <TextField fx:id="genretxt" layoutX="129.0" layoutY="222.0" prefHeight="26.0" prefWidth="310.0" />
-            <Label layoutX="22.0" layoutY="278.0" prefHeight="18.0" prefWidth="92.0" text="Available Status" />
+            <Label layoutX="22.0" layoutY="278.0" prefHeight="18.0" prefWidth="92.0" text="Available Status" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <ComboBox fx:id="combo_statusbooks" layoutX="128.0" layoutY="275.0" prefHeight="26.0" prefWidth="310.0" />
             <Button layoutX="307.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Remove" />
             <Button layoutX="170.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Update" />
             <Button layoutX="37.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Add" />
             <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onAction="#bsckBtn" text="Back" />
+            <Label layoutX="64.0" layoutY="129.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Title" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="180.0" prefHeight="18.0" prefWidth="79.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Author Name" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="226.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Genre" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

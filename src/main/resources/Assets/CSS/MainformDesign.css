@@ -73,3 +73,7 @@
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color:  #00c9b7;
 }
+.label{
+    -fx-border-radius: 9px;
+    
+}
