@@ -41,9 +41,10 @@
             <TextField fx:id="genretxt" layoutX="129.0" layoutY="222.0" prefHeight="26.0" prefWidth="310.0" />
             <Label layoutX="22.0" layoutY="278.0" prefHeight="18.0" prefWidth="92.0" text="Available Status" />
             <ComboBox fx:id="combo_statusbooks" layoutX="128.0" layoutY="275.0" prefHeight="26.0" prefWidth="310.0" />
-            <Button layoutX="307.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Remove" />
-            <Button layoutX="170.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Update" />
-            <Button layoutX="37.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" text="Add" />
+            <Button layoutX="307.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Remove" />
+            <Button layoutX="170.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Update" />
+            <Button layoutX="37.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Add" />
+            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onAction="#bsckBtn" text="Back" />
          </children>
       </AnchorPane>
    </children>

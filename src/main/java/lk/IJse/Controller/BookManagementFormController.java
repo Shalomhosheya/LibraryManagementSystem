@@ -3,10 +3,14 @@ package lk.IJse.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import lk.IJse.Module.Books;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
@@ -14,6 +18,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.util.List;
 
 public class BookManagementFormController {
@@ -97,5 +102,14 @@ public class BookManagementFormController {
         tableBookBrowers_col_Genre.setCellValueFactory(new PropertyValueFactory<>("genreType"));
         tableBookBrowers_col_AvalaibleStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+    }
+
+    public void bsckBtn(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainForm.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Main Form");
+        stage.setScene(scene);
+        stage.show();
     }
 }
