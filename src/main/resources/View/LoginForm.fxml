@@ -4,37 +4,44 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="400.0" prefWidth="600.0" styleClass="rootNode" stylesheets="@../Assets/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.loginFormController">
+<AnchorPane fx:id="rootNode" prefHeight="400.0" prefWidth="600.0" styleClass="rootNode" stylesheets="@../Assets/CSS/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.loginFormController">
    <children>
-      <Label fx:id="Label1" layoutX="235.0" layoutY="45.0" prefHeight="30.0" prefWidth="127.0" styleClass="Label1" stylesheets="@../Assets/design.css" text="BookWorm">
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@../Assets/Pictures/lib.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="Label1" layoutX="235.0" layoutY="48.0" prefHeight="30.0" prefWidth="127.0" styleClass="Label1" stylesheets="@../Assets/CSS/design.css" text="BookWorm">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="lg_nameTxt" layoutX="201.0" layoutY="127.0" prefHeight="26.0" prefWidth="181.0" styleClass="text-field" stylesheets="@../Assets/design.css" />
-      <TextField fx:id="lg_passwordTxt" layoutX="203.0" layoutY="187.0" prefHeight="26.0" prefWidth="182.0" styleClass="text-field" stylesheets="@../Assets/design.css" />
+      <TextField fx:id="lg_nameTxt" layoutX="201.0" layoutY="127.0" prefHeight="26.0" prefWidth="207.0" styleClass="text-field" stylesheets="@../Assets/CSS/design.css" />
+      <TextField fx:id="lg_passwordTxt" layoutX="203.0" layoutY="187.0" prefHeight="26.0" prefWidth="207.0" styleClass="text-field" stylesheets="@../Assets/CSS/design.css" />
       <Label fx:id="Label11" layoutX="117.0" layoutY="185.0" prefHeight="30.0" prefWidth="127.0">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="label2" layoutX="144.0" layoutY="125.0" prefHeight="30.0" prefWidth="46.0" styleClass="label2" stylesheets="@../Assets/design.css" text="Name" textFill="#0f0f0ffb" textOverrun="WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="label2" layoutX="104.0" layoutY="126.0" prefHeight="30.0" prefWidth="95.0" styleClass="label2" stylesheets="@../Assets/CSS/design.css" text="Username" textFill="#0f0f0ffb" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
-            <Font name="Bell MT Bold" size="14.0" />
+            <Font name="Bell MT Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="216.0" layoutY="263.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="148.0" stylesheets="@../Assets/design.css" text="Login" />
-      <Hyperlink layoutX="202.0" layoutY="316.0" onAction="#Hyperlink_CreateACC" prefHeight="35.0" prefWidth="175.0" text="Create an Account">
+      <Button layoutX="216.0" layoutY="263.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="148.0" stylesheets="@../Assets/CSS/design.css" text="Login" />
+      <Hyperlink layoutX="211.0" layoutY="303.0" onAction="#Hyperlink_CreateACC" prefHeight="35.0" prefWidth="175.0" text="Create an Account">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
-      <Label fx:id="label21" layoutX="122.0" layoutY="183.0" prefHeight="30.0" prefWidth="78.0" styleClass="label2" stylesheets="@../Assets/design.css" text="Password" textFill="#0f0f0ffb" textOverrun="WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="label21" layoutX="108.0" layoutY="183.0" prefHeight="30.0" prefWidth="95.0" styleClass="label2" stylesheets="@../Assets/CSS/design.css" text="Password" textFill="#0f0f0ffb" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
-            <Font name="Bell MT Bold" size="14.0" />
+            <Font name="Bell MT Bold" size="20.0" />
          </font>
       </Label>
    </children>

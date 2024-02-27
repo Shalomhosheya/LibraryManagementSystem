@@ -1,0 +1,29 @@
+
+.Label1{
+   --border-color: blue;
+  -fx-background-color:transparent;
+
+}
+.label2{
+    text-decoration-line: overline underline;
+    -fx-border-style: wavy;
+
+
+}
+.button{
+    --border-color: blue;
+    -fx-background-color: blue;
+}
+.button:hover{
+    -fx-background-color: white;
+}
+.text-field{
+    -fx-background-color: yellow;
+}
+.text-field:focused{
+    -fx-background-color: white;
+}
+.rootNode{
+    /*-fx-background-color: aqua;*/
+    -fx-background-image: "3023.jpg";
+}

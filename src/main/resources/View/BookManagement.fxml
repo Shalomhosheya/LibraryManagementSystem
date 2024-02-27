@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.BookManagementFormController">
+   <children>
+      <AnchorPane fx:id="Anchor1" layoutX="488.0" prefHeight="550.0" prefWidth="500.0">
+         <children>
+            <TableView fx:id="tableBookBrowers" prefHeight="550.0" prefWidth="500.0" stylesheets="@../Assets/CSS/MainformDesign.css">
+              <columns>
+                <TableColumn fx:id="tableBookBrowers_col_ID" prefWidth="76.0" text="Book ID" />
+                <TableColumn fx:id="tableBookBrowers_col_title" prefWidth="109.60003662109375" text="Title" />
+                  <TableColumn fx:id="tableBookBrowers_col_Author" prefWidth="85.5999755859375" text="Author" />
+                  <TableColumn fx:id="tableBookBrowers_col_Genre" prefWidth="76.7999267578125" text="Genre" />
+                  <TableColumn fx:id="tableBookBrowers_col_AvalaibleStatus" prefWidth="150.4000244140625" text="Availability Status" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="Anchor11" prefHeight="555.0" prefWidth="487.0">
+         <children>
+            <Label layoutX="153.0" layoutY="29.0" prefHeight="18.0" prefWidth="190.0" text="Book Management ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="86.0" prefHeight="18.0" prefWidth="92.0" text="Book ID" />
+            <TextField fx:id="bookid_txt" layoutX="129.0" layoutY="83.0" prefHeight="26.0" prefWidth="310.0" />
+            <Label layoutX="22.0" layoutY="128.0" prefHeight="18.0" prefWidth="92.0" text="Title" />
+            <TextField fx:id="title_txt" layoutX="129.0" layoutY="125.0" prefHeight="26.0" prefWidth="310.0" />
+            <Label layoutX="22.0" layoutY="179.0" prefHeight="18.0" prefWidth="92.0" text="Author's name:" />
+            <TextField fx:id="author_txt" layoutX="129.0" layoutY="176.0" prefHeight="26.0" prefWidth="310.0" />
+            <Label layoutX="22.0" layoutY="225.0" prefHeight="18.0" prefWidth="92.0" text="Genre Type:" />
+            <TextField fx:id="genretxt" layoutX="129.0" layoutY="222.0" prefHeight="26.0" prefWidth="310.0" />
+            <Label layoutX="22.0" layoutY="278.0" prefHeight="18.0" prefWidth="92.0" text="Available Status" />
+            <ComboBox fx:id="combo_statusbooks" layoutX="128.0" layoutY="275.0" prefHeight="26.0" prefWidth="310.0" />
+            <Button layoutX="307.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Remove" />
+            <Button layoutX="170.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Update" />
+            <Button layoutX="37.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" text="Add" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

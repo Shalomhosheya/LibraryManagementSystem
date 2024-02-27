@@ -20,4 +20,40 @@ public class mainformController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void barrowersSec(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Main Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void transactionSec(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Main Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void branchSec(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Main Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void bookMangement(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/BookManagement.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Main Form");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

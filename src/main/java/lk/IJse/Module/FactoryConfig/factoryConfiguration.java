@@ -1,5 +1,6 @@
 package lk.IJse.Module.FactoryConfig;
 
+import lk.IJse.Module.Books;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +13,7 @@ public class factoryConfiguration {
     private factoryConfiguration() {
         Configuration configuration =
                 new Configuration().configure()
-                        .addAnnotatedClass(User.class);
+                        .addAnnotatedClass(User.class).addAnnotatedClass(Books.class);
         sessionFactory = configuration.buildSessionFactory();
     }
     public static factoryConfiguration getInstance(){

@@ -15,7 +15,7 @@
       <Text layoutX="127.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="92.53668212890625" />
       <Text layoutX="127.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="78.9366455078125" />
       <Text layoutX="126.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.53668212890625" />
-      <Button layoutX="395.0" layoutY="296.0" mnemonicParsing="false" onAction="#Set_up" prefHeight="26.0" prefWidth="79.0" stylesheets="@../Assets/design.css" text="Set Up" />
+      <Button layoutX="395.0" layoutY="296.0" mnemonicParsing="false" onAction="#Set_up" prefHeight="26.0" prefWidth="79.0" stylesheets="@../Assets/CSS/design.css" text="Set Up" />
       <TextField fx:id="Reg_txt_ID" layoutX="233.0" layoutY="74.0" prefHeight="26.0" prefWidth="190.0" />
       <Text layoutX="127.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="78.9366455078125" />
    </children>
