@@ -6,70 +6,107 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.BookManagementFormController">
+<AnchorPane fx:id="rootNode" depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" prefHeight="612.0" prefWidth="1118.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.BookManagementFormController">
    <children>
-      <AnchorPane fx:id="Anchor1" layoutX="488.0" prefHeight="550.0" prefWidth="500.0">
+      <AnchorPane fx:id="Anchor1" layoutX="488.0" prefHeight="612.0" prefWidth="629.0">
          <children>
-            <TableView fx:id="tableBookBrowers" layoutY="-2.0" prefHeight="550.0" prefWidth="500.0" stylesheets="@../Assets/CSS/MainformDesign.css">
+            <TableView fx:id="tableBookBrowers" layoutY="-2.0" onMouseClicked="#bookdataSelect" prefHeight="620.0" prefWidth="630.0" stylesheets="@../Assets/CSS/MainformDesign.css">
               <columns>
                 <TableColumn fx:id="tableBookBrowers_col_ID" prefWidth="76.0" text="Book ID" />
-                <TableColumn fx:id="tableBookBrowers_col_title" prefWidth="109.60003662109375" text="Title" />
-                  <TableColumn fx:id="tableBookBrowers_col_Author" prefWidth="85.5999755859375" text="Author" />
-                  <TableColumn fx:id="tableBookBrowers_col_Genre" prefWidth="76.7999267578125" text="Genre" />
-                  <TableColumn fx:id="tableBookBrowers_col_AvalaibleStatus" prefWidth="150.4000244140625" text="Availability Status" />
+                <TableColumn fx:id="tableBookBrowers_col_title" prefWidth="144.7999267578125" text="Title" />
+                  <TableColumn fx:id="tableBookBrowers_col_Author" prefWidth="104.00006103515625" text="Author" />
+                  <TableColumn fx:id="tableBookBrowers_col_Genre" prefWidth="97.5999755859375" text="Genre" />
+                  <TableColumn fx:id="tableBookBrowers_col_AvalaibleStatus" prefWidth="206.40008544921875" text="Availability Status" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="Anchor11" prefHeight="555.0" prefWidth="487.0">
+      <AnchorPane fx:id="Anchor11" prefHeight="612.0" prefWidth="487.0">
          <children>
-            <ImageView fitHeight="555.0" fitWidth="487.0">
+            <ImageView fitHeight="626.0" fitWidth="487.0" layoutY="-3.0">
                <image>
                   <Image url="@../Assets/Pictures/(11_27_2020).jpeg" />
                </image>
+               <effect>
+                  <ColorAdjust brightness="0.24" contrast="0.06" hue="0.04" saturation="-0.09" />
+               </effect>
             </ImageView>
-            <Label layoutX="153.0" layoutY="29.0" prefHeight="18.0" prefWidth="190.0" text="Book Management ">
+            <Label layoutX="143.0" layoutY="24.0" prefHeight="35.0" prefWidth="230.0" text="Book Management ">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
+               <effect>
+                  <DropShadow height="5.25" radius="0.8125" width="0.0" />
+               </effect>
             </Label>
-            <Label layoutX="54.0" layoutY="87.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Book ID" textFill="#d6d0d0">
+            <Label layoutX="60.0" layoutY="93.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Book ID" textFill="#d6d0d0">
                <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <TextField fx:id="bookid_txt" layoutX="129.0" layoutY="83.0" prefHeight="26.0" prefWidth="310.0" />
-            <TextField fx:id="title_txt" layoutX="129.0" layoutY="125.0" prefHeight="26.0" prefWidth="310.0" />
-            <TextField fx:id="author_txt" layoutX="129.0" layoutY="176.0" prefHeight="26.0" prefWidth="310.0" />
-            <TextField fx:id="genretxt" layoutX="129.0" layoutY="222.0" prefHeight="26.0" prefWidth="310.0" />
-            <Label layoutX="22.0" layoutY="278.0" prefHeight="18.0" prefWidth="92.0" text="Available Status" textFill="#d6d0d0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <ComboBox fx:id="combo_statusbooks" layoutX="128.0" layoutY="275.0" prefHeight="26.0" prefWidth="310.0" />
-            <Button layoutX="307.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Remove" />
-            <Button layoutX="170.0" layoutY="466.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Update" />
-            <Button layoutX="37.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Add" />
-            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onAction="#bsckBtn" text="Back" />
-            <Label layoutX="64.0" layoutY="129.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Title" textFill="#d6d0d0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Label>
-            <Label layoutX="42.0" layoutY="180.0" prefHeight="18.0" prefWidth="79.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Author Name" textFill="#d6d0d0">
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect></Label>
+            <TextField fx:id="bookid_txt" layoutX="129.0" layoutY="83.0" prefHeight="40.0" prefWidth="310.0" />
+            <TextField fx:id="title_txt" layoutX="129.0" layoutY="138.0" prefHeight="40.0" prefWidth="310.0" />
+            <TextField fx:id="author_txt" layoutX="129.0" layoutY="193.0" prefHeight="40.0" prefWidth="310.0" />
+            <TextField fx:id="genretxt" layoutX="129.0" layoutY="257.0" prefHeight="40.0" prefWidth="310.0" />
+            <Label layoutX="11.0" layoutY="334.0" prefHeight="20.0" prefWidth="111.0" text="Available Status" textFill="#d6d0d0">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Label>
-            <Label layoutX="54.0" layoutY="226.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Genre" textFill="#d6d0d0">
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect></Label>
+            <ComboBox fx:id="combo_statusbooks" layoutX="128.0" layoutY="324.0" prefHeight="40.0" prefWidth="310.0" />
+            <Button layoutX="270.0" layoutY="466.0" mnemonicParsing="false" onAction="#removebookmangement" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Remove">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" onAction="#updatebookmangement" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Update">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="17.0" layoutY="466.0" mnemonicParsing="false" onAction="#EnterData" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Add">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onAction="#bsckBtn" stylesheets="@../Assets/CSS/design.css" text="Back" />
+            <Label layoutX="64.0" layoutY="142.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Title" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect>
             </Label>
+            <Label layoutX="19.0" layoutY="199.0" prefHeight="20.0" prefWidth="102.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Author Name" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect>
+            </Label>
+            <Label layoutX="54.0" layoutY="261.0" prefHeight="18.0" prefWidth="58.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Genre" textFill="#d6d0d0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect>
+            </Label>
+            <Button layoutX="381.0" layoutY="466.0" mnemonicParsing="false" onAction="#clearbookmangement" prefHeight="26.0" prefWidth="92.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Clear">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

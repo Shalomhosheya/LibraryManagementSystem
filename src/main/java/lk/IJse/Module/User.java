@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 public class User {
     @Id
     private String id;
+
     private String name;
     private String email;
     private String password;
@@ -23,9 +24,8 @@ public class User {
         return name;
     }
 
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return name;
     }
 
     public String getEmail() {
@@ -40,8 +40,7 @@ public class User {
         return password;
     }
 
-    public String setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return password;
     }
 }

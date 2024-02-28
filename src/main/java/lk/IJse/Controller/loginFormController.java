@@ -20,6 +20,7 @@ public class loginFormController {
     public AnchorPane rootNode;
     public TextField lg_nameTxt;
     public TextField lg_passwordTxt;
+    public DataDto dataDto;
 
     public void Hyperlink_CreateACC(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/Registerations.fxml"));
@@ -33,6 +34,7 @@ public class loginFormController {
 
     public void login(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
+        BookBorrowersFormController bookBorrowersFormController = null;
         Transaction transaction = null;
 
         try {
@@ -41,11 +43,19 @@ public class loginFormController {
             String name = lg_nameTxt.getText();
             String password = lg_passwordTxt.getText();
 
-            Query<User> query = session.createQuery("FROM User WHERE name = :name AND password = :password", User.class);
+            Query<User> query = session.createQuery("FROM User u WHERE u.name = :name AND u.password = :password", User.class);
             query.setParameter("name", name);
             query.setParameter("password", password);
 
+
             User user = query.uniqueResult();
+
+            Query<User> query2 = session.createQuery("FROM User u WHERE u.name = :name", User.class);
+            query2.setParameter("name", name);
+
+            User user1=query2.uniqueResult() ;
+
+
 
             if (user != null) {
                 new Alert(Alert.AlertType.INFORMATION,"Login Successfull").show();
@@ -53,11 +63,15 @@ public class loginFormController {
                 Stage stage = (Stage) rootNode.getScene().getWindow();
                 Scene scene = new Scene(parent);
                 stage.setTitle("Main Form");
+                stage.centerOnScreen();
                 stage.setScene(scene);
                 stage.show();
+                System.out.println(user1.getName());
+                dataDto.name = user1.getName();
+
 
             } else {
-                new Alert(Alert.AlertType.INFORMATION,"Login failed. Invalid credentials.").show();
+                new Alert(Alert.AlertType.INFORMATION,"Login failed.").show();
             }
 
             transaction.commit();
@@ -69,6 +83,9 @@ public class loginFormController {
         } finally {
             session.close();
         }
+    }
+    public void initialize(){
+
     }
 
 }

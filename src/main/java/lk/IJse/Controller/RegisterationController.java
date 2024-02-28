@@ -22,12 +22,13 @@ public class RegisterationController {
     public TextField Reg_txt_username;
     public TextField Reg_txt_Email;
     public AnchorPane rootNode;
+    public TextField Reg_txt_ID;
 
     public void Set_up(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
         User user = new User();
-        user.setId(Reg_txt_Email.getText());
+        user.setId(Reg_txt_ID.getText());
         user.setName(Reg_txt_username.getText());
         user.setPassword(Reg_txt_PAssword.getText());
         user.setEmail(Reg_txt_Email.getText());
@@ -45,6 +46,7 @@ public class RegisterationController {
                 Stage stage = (Stage) rootNode.getScene().getWindow();
                 Scene scene = new Scene(parent);
                 stage.setTitle("Login Form");
+                stage.centerOnScreen();
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
@@ -54,5 +56,15 @@ public class RegisterationController {
         }else {
             new Alert(Alert.AlertType.ERROR,"Error in entered Data").show();
         }
+    }
+
+    public void BacktoLogin(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/loginForm.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setTitle("Login Form");
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
     }
 }

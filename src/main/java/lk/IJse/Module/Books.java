@@ -1,54 +1,65 @@
 package lk.IJse.Module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Books {
+
     @Id
+
     private String bookId;
     private String title;
     private String authorName;
     private String genreType;
     private String status;
 
+
+
+    public Books() {
+    }
+
     public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public String setBookId(String bookId) {
         this.bookId = bookId;
+        return bookId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public String setTitle(String title) {
         this.title = title;
+        return title;
     }
 
     public String getAuthorName() {
         return authorName;
     }
 
-    public void setAuthorName(String authorName) {
+    public String setAuthorName(String authorName) {
         this.authorName = authorName;
+        return authorName;
     }
 
     public String getGenreType() {
         return genreType;
     }
 
-    public void setGenreType(String genreType) {
+    public String setGenreType(String genreType) {
         this.genreType = genreType;
+        return genreType;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public String setStatus(String status) {
         this.status = status;
+        return status;
     }
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.BookBorrowersFormController">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="394.0">
+         <children>
+            <ComboBox fx:id="book_id_comboBox" layoutX="154.0" layoutY="73.0" prefWidth="150.0" />
+            <Text layoutX="86.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID" wrappingWidth="56.536712646484375" />
+            <DatePicker fx:id="book_borrowDate" layoutX="152.0" layoutY="237.0" />
+            <Button layoutX="278.0" layoutY="352.0" mnemonicParsing="false" onAction="#book_Take" prefHeight="26.0" prefWidth="97.0" text="Take" />
+            <DatePicker fx:id="book_HandDate" layoutX="153.0" layoutY="284.0" />
+            <Text layoutX="28.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input borrowing Date" wrappingWidth="115.20000610351565" />
+            <Text layoutX="21.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input HAndoving Date" wrappingWidth="122.39998779296877" />
+            <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's ID" wrappingWidth="50.13671875" />
+            <Label fx:id="book_UserID" layoutX="82.0" layoutY="18.0" onInputMethodTextChanged="#USerIDSettingup" prefHeight="18.0" prefWidth="70.0" />
+            <Button layoutX="20.0" layoutY="452.0" mnemonicParsing="false" onAction="#backToMenu" text="Back" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="book_Detail_Table" layoutX="403.0" layoutY="48.0" prefHeight="126.0" prefWidth="394.0">
+        <columns>
+          <TableColumn fx:id="book_Detail_Table_title" prefWidth="116.0" text="Book Title" />
+          <TableColumn fx:id="book_Detail_Table_Genre" prefWidth="117.60003662109375" text="Genre" />
+            <TableColumn fx:id="book_Detail_Table_Name" prefWidth="158.4000244140625" text="Author's Name" />
+        </columns>
+      </TableView>
+      <TableView fx:id="book_Date_tablr" layoutX="404.0" layoutY="227.0" prefHeight="143.0" prefWidth="393.0">
+         <columns>
+            <TableColumn fx:id="book_Date_table_borrowDate" prefWidth="159.99993896484375" text="Borrowed Date " />
+            <TableColumn fx:id="book_Date_table_Handover" prefWidth="119.20001220703125" text="Hande over date" />
+            <TableColumn fx:id="book_Date_table_BID" prefWidth="119.20001220703125" text="Book ID" />
+         </columns>
+      </TableView>
+      <Text layoutX="288.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Borrowing Detail" wrappingWidth="246.40004882812502">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

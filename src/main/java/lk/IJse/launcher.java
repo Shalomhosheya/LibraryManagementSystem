@@ -16,8 +16,9 @@ public class launcher extends Application {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/LoginForm.fxml"));
         Scene scene = new Scene(parent);
         primaryStage.setTitle("LibrarySystem");
-       primaryStage.setScene(scene);
-       primaryStage.show();
+        primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
+        primaryStage.show();
 
     }
 }

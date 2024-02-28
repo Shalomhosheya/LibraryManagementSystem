@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -37,9 +38,9 @@ public class BookManagementFormController {
     public TextField author_txt;
     public TextField genretxt;
     public ComboBox<String> combo_statusbooks;
-
+    public ObservableList<Books> observableBooksList;
     public String Arr[]={"Available","Not Available"};
-
+    public ObservableList<String>status = FXCollections.observableArrayList(Arr);
     public void EnterData(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
@@ -47,32 +48,41 @@ public class BookManagementFormController {
         try {
             Books books = new Books();
 
-            books.setBookId(bookid_txt.getText());
-            books.setTitle(title_txt.getText());
-            books.setAuthorName(author_txt.getText());
-            books.setGenreType(genretxt.getText());
+           String id= books.setBookId(bookid_txt.getText());
+           String title= books.setTitle(title_txt.getText());
+           String name=  books.setAuthorName(author_txt.getText());
+           String genre =books.setGenreType(genretxt.getText());
 
             String selectedStatus = combo_statusbooks.getValue();
-            books.setStatus(selectedStatus);
+           String statues= books.setStatus(selectedStatus);
 
-            session.save(books);
-            transaction.commit();
 
-            // Refresh the TableView after adding a new record
-            refreshTableView();
+            if (!id.isEmpty()&&!title.isEmpty()&&!name.isEmpty()&&!genre.isEmpty()&&!statues.isEmpty()){
+                session.save(books);
+                transaction.commit();
+
+                // Refresh the TableView after adding a new record
+                refreshTableView();
+                new Alert(Alert.AlertType.INFORMATION,"Data Added").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Some Fields  are Empty").show();
+            }
 
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Duplicate ID was Entered").show();
+
         } finally {
             session.close();
         }
     }
 
     // Method to refresh the TableView with updated data from the database
-    private void refreshTableView() {
+
+
+    public void refreshTableView() {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
 
         try {
@@ -80,11 +90,8 @@ public class BookManagementFormController {
             Query<Books> query = session.createQuery("FROM Books", Books.class);
             List<Books> booksList = query.list();
 
-            // Create an ObservableList from the fetched data
-            ObservableList<Books> observableBooksList = FXCollections.observableArrayList(booksList);
-
-            // Set the items of the TableView
-            tableBookBrowers.setItems(observableBooksList);
+            // Update the existing ObservableList with the fetched data
+            observableBooksList.setAll(booksList);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,17 +99,7 @@ public class BookManagementFormController {
             session.close();
         }
     }
-    public void initialize(){
-        ObservableList<String>status = FXCollections.observableArrayList(Arr);
-        combo_statusbooks.setItems(status);
 
-        tableBookBrowers_col_ID.setCellValueFactory(new PropertyValueFactory<>("bookId"));
-        tableBookBrowers_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        tableBookBrowers_col_Author.setCellValueFactory(new PropertyValueFactory<>("authorName"));
-        tableBookBrowers_col_Genre.setCellValueFactory(new PropertyValueFactory<>("genreType"));
-        tableBookBrowers_col_AvalaibleStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-    }
 
     public void bsckBtn(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainForm.fxml"));
@@ -112,4 +109,76 @@ public class BookManagementFormController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void removebookmangement(ActionEvent actionEvent) {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
+
+        // Assuming you want to delete a specific book by ID
+        String bookIdToDelete = bookid_txt.getText();  // Replace with the actual book ID
+
+        Query query = session.createQuery("delete from Books b where b.bookId = :bookId");
+        query.setParameter("bookId", bookIdToDelete);
+
+        int rowCount = query.executeUpdate();  // This returns the number of rows affected
+        refreshTableView();
+        transaction.commit();
+        session.close();
+    }
+
+    public void updatebookmangement(ActionEvent actionEvent) {
+       Session session = factoryConfiguration.getInstance().getSessionFactory();
+       Transaction transaction = session.beginTransaction();
+       Query query =session.createQuery("update Books b set b.id =:ID where b.status =:ST and b.title=:T and b.genreType =:GT and b.authorName=:A");
+
+      query.setParameter("ID",bookid_txt.getText());
+      query.setParameter("ST",combo_statusbooks.getPromptText());
+      query.setParameter("T",title_txt.getText());
+      query.setParameter("GT",genretxt.getText());
+      query.setParameter("A",author_txt.getText());
+
+       int rowCount = query.executeUpdate();
+       refreshTableView();
+       transaction.commit();
+       session.close();
+
+
+    }
+
+
+    public void bookdataSelect(MouseEvent mouseEvent) {
+        Books selectedBook = (Books) tableBookBrowers.getSelectionModel().getSelectedItem();
+
+        if (selectedBook != null) {
+            bookid_txt.setText(selectedBook.getBookId());
+            title_txt.setText(selectedBook.getTitle());
+            author_txt.setText(selectedBook.getAuthorName());
+            genretxt.setText(selectedBook.getGenreType());
+
+            // Select the status in the ComboBox
+            combo_statusbooks.getSelectionModel().select(selectedBook.getStatus());
+        }
+    }
+
+    public void clearbookmangement(ActionEvent actionEvent) {
+        bookid_txt.clear();
+        title_txt.clear();
+        author_txt.clear();
+        genretxt.clear();
+        combo_statusbooks.setVisibleRowCount(0);
+    }
+    public void initialize(){
+        observableBooksList = FXCollections.observableArrayList();
+        combo_statusbooks.setItems(status);
+
+        tableBookBrowers_col_ID.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        tableBookBrowers_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tableBookBrowers_col_Author.setCellValueFactory(new PropertyValueFactory<>("authorName"));
+        tableBookBrowers_col_Genre.setCellValueFactory(new PropertyValueFactory<>("genreType"));
+        tableBookBrowers_col_AvalaibleStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableBookBrowers.setItems(observableBooksList);
+
+    }
+
 }
