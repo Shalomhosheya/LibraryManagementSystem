@@ -28,13 +28,16 @@ public class RegisterationController {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
         User user = new User();
-        user.setId(Reg_txt_ID.getText());
-        user.setName(Reg_txt_username.getText());
-        user.setPassword(Reg_txt_PAssword.getText());
-        user.setEmail(Reg_txt_Email.getText());
+       String id= user.setId(Reg_txt_ID.getText());
+       String name= user.setName(Reg_txt_username.getText());
+       String password = user.setPassword(Reg_txt_PAssword.getText());
+        String email =user.setEmail(Reg_txt_Email.getText());
 
-        session.save(user);
-
+        if (!id.isEmpty()&&!name.isEmpty()&&!password.isEmpty()&&!email.isEmpty()){
+            session.save(user);
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Fill all the Fields").show();
+        }
 
        transaction.commit();
        session.close();

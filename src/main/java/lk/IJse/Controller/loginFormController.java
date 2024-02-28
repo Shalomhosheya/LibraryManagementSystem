@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.IJse.Dto.DataDto;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
