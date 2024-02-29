@@ -17,12 +17,12 @@
             <ComboBox fx:id="book_id_comboBox" layoutX="154.0" layoutY="73.0" prefWidth="150.0" />
             <Text layoutX="86.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID" wrappingWidth="56.536712646484375" />
             <DatePicker fx:id="book_borrowDate" layoutX="152.0" layoutY="237.0" />
-            <Button layoutX="278.0" layoutY="352.0" mnemonicParsing="false" onAction="#book_Take" prefHeight="26.0" prefWidth="97.0" text="Take" />
+            <Button layoutX="278.0" layoutY="352.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Take" />
             <DatePicker fx:id="book_HandDate" layoutX="153.0" layoutY="284.0" />
             <Text layoutX="28.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input borrowing Date" wrappingWidth="115.20000610351565" />
             <Text layoutX="21.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input HAndoving Date" wrappingWidth="122.39998779296877" />
             <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's ID" wrappingWidth="50.13671875" />
-            <Label fx:id="book_UserID" layoutX="82.0" layoutY="18.0" onInputMethodTextChanged="#USerIDSettingup" prefHeight="18.0" prefWidth="70.0" />
+            <Label fx:id="book_UserID" layoutX="82.0" layoutY="18.0" prefHeight="18.0" prefWidth="70.0" />
             <Button layoutX="20.0" layoutY="452.0" mnemonicParsing="false" onAction="#backToMenu" text="Back" />
          </children>
       </AnchorPane>

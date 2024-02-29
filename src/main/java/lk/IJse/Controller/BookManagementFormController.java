@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import lk.IJse.Dto.BookDto;
 import lk.IJse.Module.Books;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import org.hibernate.Session;
@@ -40,6 +41,7 @@ public class BookManagementFormController {
     public ComboBox<String> combo_statusbooks;
     public ObservableList<Books> observableBooksList;
     public String Arr[]={"Available","Not Available"};
+    BookDto bookDto = new BookDto();
     public ObservableList<String>status = FXCollections.observableArrayList(Arr);
     public void EnterData(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
@@ -58,8 +60,10 @@ public class BookManagementFormController {
 
 
             if (!id.isEmpty()&&!title.isEmpty()&&!name.isEmpty()&&!genre.isEmpty()&&!statues.isEmpty()){
+
                 session.save(books);
                 transaction.commit();
+
 
                 // Refresh the TableView after adding a new record
                 refreshTableView();
@@ -129,15 +133,26 @@ public class BookManagementFormController {
     public void updatebookmangement(ActionEvent actionEvent) {
        Session session = factoryConfiguration.getInstance().getSessionFactory();
        Transaction transaction = session.beginTransaction();
-       Query query =session.createQuery("update Books b set b.id =:ID where b.status =:ST and b.title=:T and b.genreType =:GT and b.authorName=:A");
+       //Books books =  new Books();
 
-      query.setParameter("ID",bookid_txt.getText());
-      query.setParameter("ST",combo_statusbooks.getPromptText());
-      query.setParameter("T",title_txt.getText());
-      query.setParameter("GT",genretxt.getText());
-      query.setParameter("A",author_txt.getText());
+        Books books = session.get(Books.class,bookid_txt.getText());
+        String selectedStatus = combo_statusbooks.getValue();
+        String statues;
 
-       int rowCount = query.executeUpdate();
+        if (books != null){
+            books.setAuthorName(author_txt.getText());
+            books.setTitle(title_txt.getText());
+            books.setGenreType(genretxt.getText());
+            statues= books.setStatus(selectedStatus);
+
+            session.update(books);
+            refreshTableView();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Update FAIl.....REcheck the Crendentials");
+        }
+
+
+
        refreshTableView();
        transaction.commit();
        session.close();

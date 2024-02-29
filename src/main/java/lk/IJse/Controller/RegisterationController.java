@@ -28,6 +28,7 @@ public class RegisterationController {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
         User user = new User();
+
        String id= user.setId(Reg_txt_ID.getText());
        String name= user.setName(Reg_txt_username.getText());
        String password = user.setPassword(Reg_txt_PAssword.getText());

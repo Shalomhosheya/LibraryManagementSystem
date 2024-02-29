@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 public class Books {
 
     @Id
-
     private String bookId;
     private String title;
     private String authorName;

@@ -1,5 +1,6 @@
 package lk.IJse.Controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,11 +9,17 @@ import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.IJse.Dto.BookDto;
 import lk.IJse.Dto.DataDto;
+import lk.IJse.Module.Books;
+import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BookBorrowersFormController {
 
@@ -35,9 +42,25 @@ public class BookBorrowersFormController {
     public Query<Object> query2;
 
     public DataDto dataDto = new DataDto();
+    public Books books = new Books();
+    public ObservableList<String> observableList;
+    BookManagementFormController bookManagementFormController = new BookManagementFormController();
 
-    public void book_Take(javafx.event.ActionEvent actionEvent) {
 
+    public void bookIDSender(){
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
+
+        Query<String> query = session.createQuery("SELECT b.bookId FROM Books b", String.class);
+        List<String> bookIds = query.list();
+
+        System.out.println(bookIds);
+
+        book_id_comboBox.getItems().clear();
+        book_id_comboBox.getItems().addAll(bookIds);
+
+        transaction.commit();
+        session.close();
     }
 
     public void backToMenu(ActionEvent actionEvent) throws IOException {
@@ -55,11 +78,12 @@ public class BookBorrowersFormController {
         name1=name1.substring(0,1).toUpperCase()+name1.substring(1);
         book_UserID.setText(name1);
     }
+
     public void initialize(){
      userIDSetup();
+     bookIDSender();
      
     }
 
-    public void USerIDSettingup(InputMethodEvent inputMethodEvent) {
-    }
+
 }
