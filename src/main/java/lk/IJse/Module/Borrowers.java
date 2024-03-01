@@ -2,10 +2,10 @@ package lk.IJse.Module;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-public class borrowers {
+public class Borrowers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Use an appropriate strategy for your database
     private Long borrowingID;
@@ -18,29 +18,30 @@ public class borrowers {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Date Bdate;
+    @Column(name = "Bdate")
+    private LocalDateTime Bdate;
 
-    private Date HDate;
+    @Column(name = "HDate")
+    private LocalDateTime HDate;
 
-    public borrowers() {
+    // ... other methods
 
-    }
-
-    public Date getBdate() {
+    public LocalDateTime getBdate() {
         return Bdate;
     }
 
-    public void setBdate(Date bdate) {
+    public void setBdate(LocalDateTime bdate) {
         Bdate = bdate;
     }
 
-    public Date getHDate() {
+    public LocalDateTime getHDate() {
         return HDate;
     }
 
-    public void setHDate(Date HDate) {
+    public void setHDate(LocalDateTime HDate) {
         this.HDate = HDate;
     }
+
 
     public Long getBorrowingID() {
         return borrowingID;

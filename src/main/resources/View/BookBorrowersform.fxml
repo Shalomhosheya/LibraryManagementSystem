@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -17,7 +18,7 @@
             <ComboBox fx:id="book_id_comboBox" layoutX="154.0" layoutY="73.0" prefWidth="150.0" />
             <Text layoutX="86.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID" wrappingWidth="56.536712646484375" />
             <DatePicker fx:id="book_borrowDate" layoutX="152.0" layoutY="237.0" />
-            <Button layoutX="278.0" layoutY="352.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Take" />
+            <Button layoutX="278.0" layoutY="352.0" mnemonicParsing="false" onAction="#Borrow" prefHeight="26.0" prefWidth="97.0" text="Take" />
             <DatePicker fx:id="book_HandDate" layoutX="153.0" layoutY="284.0" />
             <Text layoutX="28.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input borrowing Date" wrappingWidth="115.20000610351565" />
             <Text layoutX="29.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Handoving Date" wrappingWidth="122.39998779296877" />
@@ -25,6 +26,8 @@
             <Label fx:id="book_UserID" layoutX="97.0" layoutY="18.0" prefHeight="18.0" prefWidth="70.0" />
             <Button layoutX="20.0" layoutY="452.0" mnemonicParsing="false" onAction="#backToMenu" text="Back" />
             <Button layoutX="252.0" layoutY="132.0" mnemonicParsing="false" onAction="#searchProceed" prefHeight="26.0" prefWidth="78.0" text="Search" />
+            <Text layoutX="48.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Borrowed BookID" wrappingWidth="97.60000000000002" />
+            <TextField fx:id="book_borrowID_txt" layoutX="153.0" layoutY="190.0" />
          </children>
       </AnchorPane>
       <TableView fx:id="book_Detail_Table" layoutX="403.0" layoutY="48.0" onMouseClicked="#bookIDRecongnosied" prefHeight="126.0" prefWidth="394.0">

@@ -12,6 +12,7 @@ import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 

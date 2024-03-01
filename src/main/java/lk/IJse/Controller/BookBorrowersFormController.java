@@ -1,6 +1,5 @@
 package lk.IJse.Controller;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,22 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.IJse.Dto.BookDto;
 import lk.IJse.Dto.DataDto;
 import lk.IJse.Module.Books;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
 import lk.IJse.Module.bookDetail;
+import lk.IJse.Module.Borrowers;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class BookBorrowersFormController {
@@ -49,6 +48,7 @@ public class BookBorrowersFormController {
 
     public DataDto dataDto = new DataDto();
     public Books books = new Books();
+    public TextField book_borrowID_txt;
     private ObservableList<Object[]> bookDetailData = FXCollections.observableArrayList();
     private ObservableList<bookDetail> bookDetailData1 = FXCollections.observableArrayList();
 
@@ -58,6 +58,7 @@ public class BookBorrowersFormController {
     String title;
     String genre;
     String authorName;
+
 
     BookManagementFormController bookManagementFormController = new BookManagementFormController();
 
@@ -89,7 +90,7 @@ public class BookBorrowersFormController {
         stage.show();
     }
 
- 
+
     public void userIDSetup() {
         String name1 = dataDto.name;
         name1=name1.substring(0,1).toUpperCase()+name1.substring(1);
@@ -100,8 +101,35 @@ public class BookBorrowersFormController {
 
 
     public void bookIDRecongnosied(MouseEvent mouseEvent) {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
 
+        Query<String> query = session.createQuery("SELECT b.bookId FROM Books b", String.class);
+         bookIds = query.list();
+
+        // Check if an item is selected in the ComboBox
+        if (book_id_comboBox.getSelectionModel().getSelectedIndex() != -1) {
+            // Get the selected index from the ComboBox
+            int selectedIndex = book_id_comboBox.getSelectionModel().getSelectedIndex();
+
+            // Check if the selected index is within the bounds of the bookIds list
+            if (selectedIndex >= 0 && selectedIndex < bookIds.size()) {
+                // Get the corresponding book ID
+                String selectedBookId = bookIds.get(selectedIndex);
+
+                // Set the text of book_borrowID_txt to the selected book ID
+                book_borrowID_txt.setText(selectedBookId);
+            } else {
+                System.out.println("Invalid index selected.");
+            }
+        } else {
+            System.out.println("No item selected in the ComboBox.");
+        }
+
+        transaction.commit();
+        session.close();
     }
+
 
 
     public void searchProceed(ActionEvent actionEvent) {
@@ -152,6 +180,53 @@ public class BookBorrowersFormController {
         transaction.commit();
         session.close();
     }
+    public void Borrow(ActionEvent actionEvent) {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
+
+        Borrowers borrowers = new Borrowers();
+        User user1 = new User();
+        String UserID = dataDto.userId;
+
+        user1.setId(UserID);
+
+        // Assuming book_borrowID_txt contains the book ID, extract its text
+        String bookId = book_borrowID_txt.getText();
+
+        // Retrieve the Books entity using the extracted book ID
+        Books book = session.get(Books.class, bookId);
+
+        borrowers.setBook(book);
+        borrowers.setUser(user1);
+
+        // Inserting current date and time for borrow date
+        LocalDateTime borrowDate = LocalDateTime.now();
+        borrowers.setBdate(borrowDate);
+
+        // Inserting current date and time for hand date
+        LocalDateTime handDate = LocalDateTime.now().plusDays(7); // assuming you want to add 7 days
+        borrowers.setHDate(handDate);
+
+        // Check if book_borrowDate and book_HandDate are not null
+        if (book_borrowDate.getValue() != null) {
+            borrowDate = book_borrowDate.getValue().atStartOfDay();
+            borrowers.setBdate(borrowDate);
+        }
+
+        if (book_HandDate.getValue() != null) {
+            handDate = book_HandDate.getValue().atStartOfDay();
+            borrowers.setHDate(handDate);
+        }
+
+        // Handle other validations if needed
+
+        session.save(borrowers);
+        transaction.commit();
+        session.close();
+    }
+
+
+
 
     public void initialize() {
         userIDSetup();
@@ -162,6 +237,7 @@ public class BookBorrowersFormController {
         book_Detail_Table_Genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         book_Detail_Table_Name.setCellValueFactory(new PropertyValueFactory<>("authorName"));
     }
+
 
 
 }

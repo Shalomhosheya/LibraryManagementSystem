@@ -17,6 +17,8 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 
+
+
 public class loginFormController {
     public AnchorPane rootNode;
     public TextField lg_nameTxt;
@@ -56,7 +58,12 @@ public class loginFormController {
 
             User user1=query2.uniqueResult() ;
 
+            Query<User> query3 = session.createQuery("select u.id from User u where u.name = :name group by u.id", User.class);
+            query3.setParameter("name", name);
 
+            String user3 = String.valueOf(query3.uniqueResult());
+
+            System.out.println(user3);
 
             if (user != null) {
                 new Alert(Alert.AlertType.INFORMATION,"Login Successfull").show();
@@ -69,7 +76,7 @@ public class loginFormController {
                 stage.show();
                 System.out.println(user1.getName());
                 dataDto.name = user1.getName();
-
+                dataDto.userId = user3;
 
             } else {
                 new Alert(Alert.AlertType.INFORMATION,"Login failed.").show();
