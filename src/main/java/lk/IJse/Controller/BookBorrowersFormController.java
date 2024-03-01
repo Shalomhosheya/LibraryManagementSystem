@@ -222,7 +222,6 @@ public class BookBorrowersFormController {
 
         if (!UserID.isEmpty() && !bookId.isEmpty() && borrowDate != null && handDate != null) {
             new Alert(Alert.AlertType.INFORMATION,"THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
-            
 
             session.save(borrowers);
             transaction.commit();
