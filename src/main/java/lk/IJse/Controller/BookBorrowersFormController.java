@@ -220,10 +220,19 @@ public class BookBorrowersFormController {
 
         // Handle other validations if needed
 
-        session.save(borrowers);
-        transaction.commit();
-        session.close();
+        if (!UserID.isEmpty() && !bookId.isEmpty() && borrowDate != null && handDate != null) {
+            new Alert(Alert.AlertType.INFORMATION,"THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
+            
+
+            session.save(borrowers);
+            transaction.commit();
+            session.close();
+
+        } else {
+            System.out.println("Please fill in all the required fields.");
+        }
     }
+
 
 
 
@@ -237,7 +246,5 @@ public class BookBorrowersFormController {
         book_Detail_Table_Genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         book_Detail_Table_Name.setCellValueFactory(new PropertyValueFactory<>("authorName"));
     }
-
-
 
 }
