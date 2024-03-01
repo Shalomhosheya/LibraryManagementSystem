@@ -1,0 +1,19 @@
+
+.text-field{
+    -fx-background-color: #c56cf0;
+
+}
+.label{
+    -fx-border-style:20px ;
+}
+.text-field:focused{
+    /*-fx-background-color: white;*/
+   -fx-background-color:white;
+
+}
+.button{
+   -fx-background-color: #f78fb3;
+}
+.button:hover{
+    -fx-background-color: white;
+}
