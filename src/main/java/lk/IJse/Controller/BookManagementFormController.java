@@ -151,8 +151,6 @@ public class BookManagementFormController {
             new Alert(Alert.AlertType.ERROR,"Update FAIl.....REcheck the Crendentials");
         }
 
-
-
        refreshTableView();
        transaction.commit();
        session.close();
@@ -193,7 +191,6 @@ public class BookManagementFormController {
         tableBookBrowers_col_AvalaibleStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         tableBookBrowers.setItems(observableBooksList);
-
     }
 
 }

@@ -65,24 +65,27 @@ public class BranchFormController {
         Transaction transaction = session.beginTransaction();
 
         String id = branchIDtxt.getText();
-        String brancADD = branchADDTXt.getText();
+        String branchADD = branchADDTXt.getText();
         int qty = Integer.parseInt(qtytxt.getText());
 
         String statusBox = statustCombobox.getValue();
         String status = branch.setStatus(statusBox);
 
         branch.setBranch_ID(id);
-        branch.setBranchADD(brancADD);
+        branch.setBranchADD(branchADD);
         branch.setBooksQuantity(qty);
         branch.setStatus(status);
 
+        // Refresh the TableView first
         refreshTableView();
+
+        // Save the new branch
         session.save(branch);
 
         transaction.commit();
         session.close();
-
     }
+
     public void refreshTableView() {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
 
@@ -118,10 +121,11 @@ public class BranchFormController {
             branch1.setBooksQuantity(Integer.parseInt(qtytxt.getText()));
             branch1.setStatus(selected);
 
-            refreshTableView();// SaveOrUpdate the branch
+
             session.saveOrUpdate(branch1);
             transaction.commit();
             session.close();
+            refreshTableView();// SaveOrUpdate the branch;
         } else {
             System.out.println("Update Fail");
         }
@@ -138,9 +142,19 @@ public class BranchFormController {
         stage.show();
     }
     public void selectedData(MouseEvent mouseEvent) {
+        Branch selected = (Branch) branch_TableView.getSelectionModel().getSelectedItem();
+        if (selected!=null){
+            branchIDtxt.setText(selected.getBranch_ID());
+            branchADDTXt.setText(selected.getBranchADD());
+            qtytxt.setText(String.valueOf(selected.getBooksQuantity()));
+
+            statustCombobox.getSelectionModel().select(selected.getStatus());
+        }
 
     }
+
     public void initialize(){
+
         branchObservableList = FXCollections.observableArrayList();
         statustCombobox.setItems(status);
 
@@ -150,6 +164,7 @@ public class BranchFormController {
         statuscol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         branch_TableView.setItems(branchObservableList);
+        refreshTableView();
     }
 
 
