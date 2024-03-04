@@ -11,14 +11,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.IJse.Module.Branch;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BranchFormController {
     @FXML
@@ -37,7 +41,7 @@ public class BranchFormController {
     private TableColumn<?, ?> branchNamecol;
 
     @FXML
-    private TableView<?> branch_TableView;
+    private TableView<Branch> branch_TableView;
 
     @FXML
     private TextField qtytxt;
@@ -52,6 +56,7 @@ public class BranchFormController {
     @FXML
     private ComboBox<String> statustCombobox;
     public ObservableList<String> status = FXCollections.observableArrayList(arr);
+    public ObservableList<Branch>branchObservableList;
     Branch branch = new Branch();
 
     @FXML
@@ -71,17 +76,57 @@ public class BranchFormController {
         branch.setBooksQuantity(qty);
         branch.setStatus(status);
 
+        refreshTableView();
         session.save(branch);
 
         transaction.commit();
         session.close();
 
     }
+    public void refreshTableView() {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+
+        try {
+            // Fetch all books from the database
+            Query<Branch> query = session.createQuery("FROM Branch", Branch.class);
+            List<Branch> BranchList = query.list();
+
+            // Update the existing ObservableList with the fetched data
+            branchObservableList.setAll(BranchList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 
     @FXML
     void Update(ActionEvent event) {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
 
+        // Get the branch by ID
+        Branch branch1 = session.get(Branch.class, branchIDtxt.getText());
+
+        String selected = statustCombobox.getValue();
+
+        if (branch1 != null) {
+            branch1.setBranch_ID(branchIDtxt.getText());
+            branch1.setBranchADD(branchADDTXt.getText());
+            branch1.setBooksQuantity(Integer.parseInt(qtytxt.getText()));
+            branch1.setStatus(selected);
+
+            refreshTableView();// SaveOrUpdate the branch
+            session.saveOrUpdate(branch1);
+            transaction.commit();
+            session.close();
+        } else {
+            System.out.println("Update Fail");
+        }
     }
+
 
     public void BAckTOmenu(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainForm.fxml"));
@@ -92,7 +137,20 @@ public class BranchFormController {
         stage.setScene(scene);
         stage.show();
     }
-    public void initialize(){
-        statustCombobox.setItems(status);
+    public void selectedData(MouseEvent mouseEvent) {
+
     }
+    public void initialize(){
+        branchObservableList = FXCollections.observableArrayList();
+        statustCombobox.setItems(status);
+
+        branchIDCol.setCellValueFactory(new PropertyValueFactory<>("branch_ID"));
+        branchNamecol.setCellValueFactory(new PropertyValueFactory<>("branchADD"));
+        bookdqtycol.setCellValueFactory(new PropertyValueFactory<>("booksQuantity")); // Note the correction in property name
+        statuscol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        branch_TableView.setItems(branchObservableList);
+    }
+
+
 }

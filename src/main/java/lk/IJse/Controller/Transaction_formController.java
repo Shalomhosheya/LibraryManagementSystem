@@ -23,8 +23,6 @@ public class Transaction_formController {
     public TableColumn H_dateCol;
     public AnchorPane rootNode;
 
-   
-
     public void BacktoMenu(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();
