@@ -43,7 +43,7 @@ public class mainformController {
     }
 
     public void transactionSec(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/transaction_form.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setTitle("Main Form");
@@ -53,7 +53,7 @@ public class mainformController {
     }
 
     public void branchSec(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/BranchForm.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setTitle("Main Form");
