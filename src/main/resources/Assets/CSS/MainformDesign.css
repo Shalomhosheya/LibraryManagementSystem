@@ -49,8 +49,8 @@
     -fx-font-size: 14px;
 }
 .table-row-cell:selected {
-    -fx-background-color: rgba(0, 201, 183, 0.27);
-    -fx-text-fill: rgba(213, 0, 25, 0.62);
+    -fx-background-color: rgba(235, 64, 52,0.5);
+    -fx-text-fill: rgba(235, 64, 52, 0.62);
 }
 
 .table-view .virtual-flow .scroll-bar:vertical,
