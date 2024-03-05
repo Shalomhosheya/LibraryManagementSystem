@@ -17,6 +17,9 @@ public class Borrowers {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "branch_ID")
+    private Branch branch;
 
     @Column(name = "Bdate")
     private LocalDateTime Bdate;
@@ -24,7 +27,13 @@ public class Borrowers {
     @Column(name = "HDate")
     private LocalDateTime HDate;
 
-    // ... other methods
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
 
     public LocalDateTime getBdate() {
         return Bdate;
@@ -67,5 +76,8 @@ public class Borrowers {
         this.user = user;
     }
 
+    public void setBorrowingID(String branchID) {
+
+    }
 }
 

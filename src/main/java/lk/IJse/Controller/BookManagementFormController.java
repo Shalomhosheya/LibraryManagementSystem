@@ -8,12 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import lk.IJse.Dto.BookDto;
 import lk.IJse.Module.Books;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import org.hibernate.Session;
@@ -41,7 +38,7 @@ public class BookManagementFormController {
     public ComboBox<String> combo_statusbooks;
     public ObservableList<Books> observableBooksList;
     public String Arr[]={"Available","Not Available"};
-    BookDto bookDto = new BookDto();
+
     public ObservableList<String>status = FXCollections.observableArrayList(Arr);
     public void EnterData(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();

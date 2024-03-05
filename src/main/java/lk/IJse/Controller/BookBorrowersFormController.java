@@ -11,12 +11,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.IJse.Dto.BranchDto;
 import lk.IJse.Dto.DataDto;
-import lk.IJse.Module.Books;
+import lk.IJse.Module.*;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
-import lk.IJse.Module.User;
-import lk.IJse.Module.bookDetail;
-import lk.IJse.Module.Borrowers;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -49,18 +47,17 @@ public class BookBorrowersFormController {
     public DataDto dataDto = new DataDto();
     public Books books = new Books();
     public TextField book_borrowID_txt;
+    public ComboBox book_branchID;
+    public BranchDto branchDto =  new BranchDto();
+    private ObservableList<BranchDto>branchObservableList = FXCollections.observableArrayList();
     private ObservableList<Object[]> bookDetailData = FXCollections.observableArrayList();
     private ObservableList<bookDetail> bookDetailData1 = FXCollections.observableArrayList();
-
-
-
-    List<String> bookIds;
-    String title;
-    String genre;
-    String authorName;
-
-
-    BookManagementFormController bookManagementFormController = new BookManagementFormController();
+    public List<String> bookIds;
+    public List<Branch> branchIDs;
+    public String title;
+    public String genre;
+    public String authorName;
+    public BookManagementFormController bookManagementFormController = new BookManagementFormController();
 
 
     public void bookIDSender(){
@@ -75,6 +72,20 @@ public class BookBorrowersFormController {
         book_id_comboBox.getItems().clear();
         book_id_comboBox.getItems().addAll(bookIds);
 
+
+        transaction.commit();
+        session.close();
+    }
+    public void branchIdsender(){
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
+
+        Query<Branch> query3 = session.createQuery("select b.id from Branch b ", Branch.class);
+        branchIDs =query3.list();
+        System.out.println(branchIDs);
+
+        book_branchID.getItems().clear();
+        book_branchID.getItems().addAll(branchIDs);
 
         transaction.commit();
         session.close();
@@ -186,8 +197,10 @@ public class BookBorrowersFormController {
 
         Borrowers borrowers = new Borrowers();
         User user1 = new User();
+        Branch branch = new Branch();
         String UserID = dataDto.userId;
 
+        String branchID =book_branchID.getAccessibleText();
         user1.setId(UserID);
 
         // Assuming book_borrowID_txt contains the book ID, extract its text
@@ -198,6 +211,7 @@ public class BookBorrowersFormController {
 
         borrowers.setBook(book);
         borrowers.setUser(user1);
+        borrowers.setBorrowingID(branchID);
 
         // Inserting current date and time for borrow date
         LocalDateTime borrowDate = LocalDateTime.now();
@@ -238,6 +252,7 @@ public class BookBorrowersFormController {
 
     public void initialize() {
         userIDSetup();
+        branchIdsender();
         bookIDSender();
         book_Detail_Table.setItems(bookDetailData1);
 

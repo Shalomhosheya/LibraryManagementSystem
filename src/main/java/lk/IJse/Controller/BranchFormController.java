@@ -7,16 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.IJse.Dto.BranchDto;
 import lk.IJse.Module.Branch;
 import lk.IJse.Module.FactoryConfig.factoryConfiguration;
+import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -57,7 +56,9 @@ public class BranchFormController {
     private ComboBox<String> statustCombobox;
     public ObservableList<String> status = FXCollections.observableArrayList(arr);
     public ObservableList<Branch>branchObservableList;
-    Branch branch = new Branch();
+
+    public BranchDto branchDto = new BranchDto();
+    public Branch branch = new Branch();
 
     @FXML
     void Add(ActionEvent event) {
@@ -79,7 +80,7 @@ public class BranchFormController {
         // Refresh the TableView first
         refreshTableView();
 
-        // Save the new branch
+
         session.save(branch);
 
         transaction.commit();
@@ -127,7 +128,7 @@ public class BranchFormController {
             session.close();
             refreshTableView();// SaveOrUpdate the branch;
         } else {
-            System.out.println("Update Fail");
+            new Alert(Alert.AlertType.ERROR,"Update Fail!").show();
         }
     }
 
