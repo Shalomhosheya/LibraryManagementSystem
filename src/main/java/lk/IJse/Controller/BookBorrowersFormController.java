@@ -21,7 +21,6 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public class BookBorrowersFormController {
@@ -46,6 +45,7 @@ public class BookBorrowersFormController {
 
     public DataDto dataDto = new DataDto();
     public Books books = new Books();
+    public Branch branch = new Branch();
     public TextField book_borrowID_txt;
     public ComboBox book_branchID;
     public BranchDto branchDto =  new BranchDto();
@@ -53,7 +53,7 @@ public class BookBorrowersFormController {
     private ObservableList<Object[]> bookDetailData = FXCollections.observableArrayList();
     private ObservableList<bookDetail> bookDetailData1 = FXCollections.observableArrayList();
     public List<String> bookIds;
-    public List<Branch> branchIDs;
+    public List<String> branchIDs;
     public String title;
     public String genre;
     public String authorName;
@@ -80,7 +80,7 @@ public class BookBorrowersFormController {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
 
-        Query<Branch> query3 = session.createQuery("select b.id from Branch b ", Branch.class);
+        Query<String> query3 = session.createQuery("select b.id from Branch b ", String.class);
         branchIDs =query3.list();
         System.out.println(branchIDs);
 
@@ -91,7 +91,6 @@ public class BookBorrowersFormController {
         session.close();
     }
 
-
     public void backToMenu(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainForm.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();
@@ -101,15 +100,11 @@ public class BookBorrowersFormController {
         stage.show();
     }
 
-
     public void userIDSetup() {
         String name1 = dataDto.name;
         name1=name1.substring(0,1).toUpperCase()+name1.substring(1);
         book_UserID.setText(name1);
     }
-
-
-
 
     public void bookIDRecongnosied(MouseEvent mouseEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
@@ -140,8 +135,6 @@ public class BookBorrowersFormController {
         transaction.commit();
         session.close();
     }
-
-
 
     public void searchProceed(ActionEvent actionEvent) {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
@@ -197,21 +190,21 @@ public class BookBorrowersFormController {
 
         Borrowers borrowers = new Borrowers();
         User user1 = new User();
-        Branch branch = new Branch();
-        String UserID = dataDto.userId;
 
-        String branchID =book_branchID.getAccessibleText();
-        user1.setId(UserID);
+        String userID = dataDto.userId;
+        String branchID = (String) book_branchID.getValue();  // Use getValue to get the selected branch ID
+        System.out.println(branchID);
+
+        user1.setId(userID);
+        Branch branch = session.get(Branch.class, branchID);
 
         // Assuming book_borrowID_txt contains the book ID, extract its text
-        String bookId = book_borrowID_txt.getText();
-
-        // Retrieve the Books entity using the extracted book ID
-        Books book = session.get(Books.class, bookId);
+        String bookID = book_borrowID_txt.getText();
+        Books book = session.get(Books.class, bookID);
 
         borrowers.setBook(book);
         borrowers.setUser(user1);
-        borrowers.setBorrowingID(branchID);
+        borrowers.setBranch(branch);  // Set the branch directly
 
         // Inserting current date and time for borrow date
         LocalDateTime borrowDate = LocalDateTime.now();
@@ -234,20 +227,16 @@ public class BookBorrowersFormController {
 
         // Handle other validations if needed
 
-        if (!UserID.isEmpty() && !bookId.isEmpty() && borrowDate != null && handDate != null) {
-            new Alert(Alert.AlertType.INFORMATION,"THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
+        if (!userID.isEmpty() && !bookID.isEmpty() && borrowDate != null && handDate != null) {
+            new Alert(Alert.AlertType.INFORMATION, "THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
 
             session.save(borrowers);
             transaction.commit();
             session.close();
-
         } else {
             System.out.println("Please fill in all the required fields.");
         }
     }
-
-
-
 
 
     public void initialize() {
