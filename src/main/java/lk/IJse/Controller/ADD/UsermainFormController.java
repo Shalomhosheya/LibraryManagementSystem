@@ -25,7 +25,7 @@ public class UsermainFormController {
     }
 
     public void transactionSec(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/transaction_form.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/View2/transaction_formUser.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setTitle("Main Form");

@@ -1,0 +1,15 @@
+.button {
+    --border-color: black;
+
+    -fx-background-color: linear-gradient(to right, rgba(255,0,0), rgba(255, 255, 255));
+    -fx-background-radius: 100px;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, rgba(255,0,0,0.2), rgba(255, 255, 255));
+    -fx-background-radius: 100px;
+
+}
+
+
+/*border-radius:10px solid black;*/
