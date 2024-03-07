@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.ADD.BookBorrowersformUserController">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="394.0">
+         <children>
+            <ImageView fitHeight="500.0" fitWidth="800.0" layoutX="-2.0">
+               <image>
+                  <Image url="@../Assets/Pictures/library-with-round-window-bookcase-with-bookcase-left.jpg" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="book_id_comboBox" layoutX="154.0" layoutY="103.0" prefHeight="26.0" prefWidth="172.0" stylesheets="@../Assets/CSS/design.css" />
+            <Text fill="#fffdfd" layoutX="62.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID" wrappingWidth="70.40000000000009">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <DatePicker fx:id="book_borrowDate" layoutX="155.0" layoutY="293.0" prefHeight="26.0" prefWidth="214.0" stylesheets="@../Assets/CSS/design.css" />
+            <Button layoutX="194.0" layoutY="403.0" mnemonicParsing="false" onAction="#Borrow" prefHeight="37.0" prefWidth="136.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Take" />
+            <DatePicker fx:id="book_HandDate" layoutX="155.0" layoutY="345.0" prefHeight="26.0" prefWidth="214.0" stylesheets="@../Assets/CSS/design.css" />
+            <Text fill="#fffdfd" layoutX="9.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input borrowing Date:" wrappingWidth="150.39999999999998">
+               <font>
+                  <Font name="Bell MT Bold" size="14.0" />
+               </font></Text>
+            <Text fill="#fffdfd" layoutX="9.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Handoving Date:" wrappingWidth="150.39999999999998">
+               <font>
+                  <Font name="Bell MT Bold" size="14.0" />
+               </font></Text>
+            <Text fill="#fffdfd" layoutX="21.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's Name" wrappingWidth="78.13671875">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font></Text>
+            <Label fx:id="book_UserID" layoutX="102.0" layoutY="21.0" prefHeight="18.0" prefWidth="70.0" textFill="#fffdfd">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font></Label>
+            <Button layoutX="20.0" layoutY="452.0" mnemonicParsing="false" onAction="#backToMenu" stylesheets="@../Assets/CSS/design.css" text="Back" />
+            <Button layoutX="252.0" layoutY="146.0" mnemonicParsing="false" onAction="#searchProceed" prefHeight="26.0" prefWidth="78.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Search" />
+            <Text fill="#fffdfd" layoutX="21.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Borrowed BookID:" wrappingWidth="126.39996948242185">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="book_borrowID_txt" layoutX="155.0" layoutY="214.0" prefHeight="26.0" prefWidth="214.0" stylesheets="@../Assets/CSS/design.css" />
+            <Text fill="#fffdfd" layoutX="252.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Borrowing Detail" wrappingWidth="354.4000000000001">
+               <font>
+                  <Font name="Arial Black" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="#fffdfd" layoutX="77.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch ID:" wrappingWidth="70.40000000000003">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="book_branchID" layoutX="155.0" layoutY="254.0" prefWidth="150.0" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="book_Detail_Table" layoutX="394.0" layoutY="90.0" onMouseClicked="#bookIDRecongnosied" prefHeight="309.0" prefWidth="394.0">
+        <columns>
+          <TableColumn fx:id="book_Detail_Table_title" prefWidth="116.0" text="Book Title" />
+          <TableColumn fx:id="book_Detail_Table_Genre" prefWidth="117.60003662109375" text="Genre" />
+            <TableColumn fx:id="book_Detail_Table_Name" prefWidth="158.4000244140625" text="Author's Name" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
