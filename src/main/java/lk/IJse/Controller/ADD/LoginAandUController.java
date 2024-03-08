@@ -22,7 +22,6 @@ public class LoginAandUController {
         stage.show();
 
     }
-
     public void UserSEc(MouseEvent mouseEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View2/LoginFormUser.fxml"));
         Stage stage = (Stage) rootNode.getScene().getWindow();

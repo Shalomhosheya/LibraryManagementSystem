@@ -79,7 +79,7 @@ public class loginFormController {
                 dataDto.userId = user3;
 
             } else {
-                new Alert(Alert.AlertType.INFORMATION,"Login failed.").show();
+                new Alert(Alert.AlertType.ERROR,"Login failed.").show();
             }
 
             transaction.commit();

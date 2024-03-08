@@ -37,7 +37,10 @@
             <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
          </effect>
       </Label>
-      <Button layoutX="204.0" layoutY="257.0" mnemonicParsing="false" onAction="#login" onKeyTyped="#login" prefHeight="30.0" prefWidth="201.0" stylesheets="@../Assets/CSS/design.css" text="Login" />
+      <Button layoutX="211.0" layoutY="261.0" mnemonicParsing="false" onAction="#login" onKeyTyped="#login" prefHeight="38.0" prefWidth="175.0" stylesheets="@../Assets/CSS/design.css" text="Login" textFill="#f2f2f2">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Button>
       <Hyperlink layoutX="211.0" layoutY="323.0" onAction="#Hyperlink_CreateACC" prefHeight="35.0" prefWidth="175.0" text="Create an Account">
          <font>
             <Font name="System Bold" size="18.0" />

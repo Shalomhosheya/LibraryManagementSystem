@@ -87,7 +87,7 @@ public class UserLoginController {
                 UserDto.userId = String.valueOf(user3);
 
             } else {
-                new Alert(Alert.AlertType.INFORMATION,"Login failed.").show();
+                new Alert(Alert.AlertType.ERROR,"Login failed.").show();
             }
 
             transaction.commit();
