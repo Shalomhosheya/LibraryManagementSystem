@@ -15,31 +15,36 @@
             <Image url="@../Assets/Pictures/A%20Cozy%20Oasis_%20Unwind%20and%20Relax%20in%20the%20Serene%20Ambiance%20of%20Our%20Café.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="Reg_txt_username" layoutX="233.0" layoutY="118.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
-      <TextField fx:id="Reg_txt_Email" layoutX="233.0" layoutY="167.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
-      <TextField fx:id="Reg_txt_PAssword" layoutX="233.0" layoutY="211.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
-      <Text fill="#efefef" layoutX="245.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registeration" wrappingWidth="112.53668212890625">
+      <TextField fx:id="Reg_txt_username" layoutX="150.0" layoutY="125.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
+      <TextField fx:id="Reg_txt_Email" layoutX="150.0" layoutY="174.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
+      <TextField fx:id="Reg_txt_PAssword" layoutX="150.0" layoutY="218.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
+      <Text fill="#efefef" layoutX="224.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registeration" wrappingWidth="169.53668212890625">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="25.0" />
          </font></Text>
-      <Text fill="#efefef" layoutX="164.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="62.93670654296875">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Text>
-      <Text fill="#efefef" layoutX="145.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="79.20000000000005">
+      <Text fill="#efefef" layoutX="81.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="62.93670654296875">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Text>
-      <Text fill="#efefef" layoutX="138.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.53668212890625">
+      <Text fill="#efefef" layoutX="62.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="79.20000000000005">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font></Text>
+      <Text fill="#efefef" layoutX="55.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.53668212890625">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Text>
       <Button layoutX="465.0" layoutY="296.0" mnemonicParsing="false" onAction="#Set_up" prefHeight="26.0" prefWidth="79.0" stylesheets="@../Assets/CSS/Design2.css" text="Set Up" />
-      <TextField fx:id="Reg_txt_ID" layoutX="233.0" layoutY="74.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
-      <Text fill="#efefef" layoutX="185.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="38.13665771484375">
+      <TextField fx:id="Reg_txt_ID" layoutX="150.0" layoutY="81.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../Assets/CSS/Design2.css" />
+      <Text fill="#efefef" layoutX="102.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="38.13665771484375">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Text>
-      <Button layoutX="76.0" layoutY="296.0" mnemonicParsing="false" onAction="#BacktoLogin" prefHeight="26.0" prefWidth="79.0" stylesheets="@../Assets/CSS/design.css" text="Back" />
+      <Button layoutX="76.0" layoutY="296.0" mnemonicParsing="false" onAction="#BacktoLogin" prefHeight="26.0" prefWidth="79.0" stylesheets="@../Assets/CSS/design.css" text="Back" textFill="#e4e4e4" />
+      <ImageView fitHeight="162.0" fitWidth="151.0" layoutX="389.0" layoutY="86.0">
+         <image>
+            <Image url="@../Assets/Pictures/admin-administrator-panel-web-icon-vector-40886133.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
