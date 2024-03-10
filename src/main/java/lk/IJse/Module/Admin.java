@@ -1,11 +1,12 @@
 package lk.IJse.Module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Admin {
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Use an appropriate strategy for your database
+//    @Column(name = "id") // Specify the column name if it's different from the field name
     private String id;
 
     private String name;

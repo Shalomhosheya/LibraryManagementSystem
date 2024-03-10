@@ -19,27 +19,26 @@ import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.awt.print.Book;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 public class Transaction_formController {
-    public Borrowers borrowers = new Borrowers();
-    public Branch branch = new Branch();
-    public Books books = new Books();
-    public User user = new User();
-    public TableView<Borrowers>TransTableView;
-    public TableColumn <Borrowers,Books>B_IDCol;
-    public TableColumn <Borrowers,User>U_IDCol;
-    public TableColumn <Borrowers,Books>B_NameCol;
-    public TableColumn <Borrowers,Branch>BranchNameCol;
-    public TableColumn U_nameCol;
-    public TableColumn <Borrowers, Date> BorrowD_col;
-    public TableColumn <Borrowers,Date>H_dateCol;
+    public TableView<Borrowers> TransTableView;
+    public TableColumn<Borrowers, String> B_IDCol;
+    public TableColumn<Borrowers, String> U_IDCol;
+    public TableColumn<Borrowers, String> B_NameCol;
+    public TableColumn<Borrowers, String> BranchNameCol;
+    public TableColumn<Borrowers, String> U_nameCol;
+    public TableColumn<Borrowers, String> BorrowD_col;
+    public TableColumn<Borrowers, String> H_dateCol;
     public List<Borrowers> borrowersList;
     public AnchorPane rootNode;
     private factoryConfiguration factoryConfiguration;
@@ -49,34 +48,52 @@ public class Transaction_formController {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query<Borrowers> query = session.createQuery("from Borrowers", Borrowers.class);
-            List<Borrowers> resultList = query.list();
+            NativeQuery<Object[]> query = session.createNativeQuery(
+                    "SELECT b.bookId, b.Bdate, b.HDate, u.name AS userName, bk.title AS bookTitle, br.branchADD AS branchAddress\n" +
+                            "FROM Borrowers b\n" +
+                            "JOIN User u ON b.user_id = u.id\n" +
+                            "JOIN Books bk ON b.book_id = bk.bookId\n" +
+                            "JOIN Branch br ON b.branch_ID = br.branch_ID;\n");
+            List<Object[]> resultList = query.list();
 
-            // Ensure that the list is not null before clearing and updating it
+            for (Object[] result : resultList) {
+                for (Object column : result) {
+                    System.out.print(column + " ");
+                }
+                System.out.println();
+            }
             if (borrowersList == null) {
-                borrowersList = new ArrayList<>();
+                borrowersList = FXCollections.observableArrayList();
             } else {
                 borrowersList.clear();
             }
 
-            // Update the list with the new results
-            borrowersList.addAll(resultList);
+            for (Object[] result : resultList) {
+                Borrowers borrower = new Borrowers();
+                borrower.setBookId((String) result[0]); // Corrected data type
+                borrower.setBdate(((java.sql.Timestamp) result[1]).toLocalDateTime());
+                borrower.setHDate(((java.sql.Timestamp) result[2]).toLocalDateTime());
+                borrower.setUserName((String) result[3]);
+                borrower.setBookTitle((String) result[4]);
+                borrower.setBranchAddress((String) result[5]);
 
-            System.out.println(borrowersList);
+                borrowersList.add(borrower);
+            }
+
 
             transaction.commit();
         } catch (Exception e) {
-            // Handle any exceptions appropriately
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace(); // Log or handle the exception as needed
+            e.printStackTrace();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
     }
+
 
     public void BacktoMenu(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainform.fxml"));
@@ -97,14 +114,15 @@ public class Transaction_formController {
         stage.setScene(scene);
         stage.show();
     }
+
     public void initialize() {
         borrowersList = FXCollections.observableArrayList();
         refreshTable();
 
-        B_IDCol.setCellValueFactory(new PropertyValueFactory<>("id")); // Assuming "id" is the property in Borrowers for book_id
-        U_IDCol.setCellValueFactory(new PropertyValueFactory<>("user")); // Assuming "user" is the property in Borrowers for user_id
-        B_NameCol.setCellValueFactory(new PropertyValueFactory<>("book")); // Assuming "book" is the property in Borrowers for book_id
-        BranchNameCol.setCellValueFactory(new PropertyValueFactory<>("branch")); // Assuming "branch" is the property in Borrowers for branch_ID
+//        B_IDCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        U_IDCol.setCellValueFactory(new PropertyValueFactory<>("userName")); // Change the property name
+        B_NameCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
+        BranchNameCol.setCellValueFactory(new PropertyValueFactory<>("branchAddress"));
         BorrowD_col.setCellValueFactory(new PropertyValueFactory<>("Bdate"));
         H_dateCol.setCellValueFactory(new PropertyValueFactory<>("HDate"));
 

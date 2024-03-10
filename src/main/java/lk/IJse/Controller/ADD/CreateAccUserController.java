@@ -48,7 +48,7 @@ public class CreateAccUserController {
             if (admin.getId() != null) {
                 try {
                     new Alert(Alert.AlertType.INFORMATION,"Registeration SuccessFull").show();
-                    Parent parent = FXMLLoader.load(getClass().getResource("/View/loginForm.fxml"));
+                    Parent parent = FXMLLoader.load(getClass().getResource("/View2/LoginFormUser.fxml"));
                     Stage stage = (Stage) rootNode.getScene().getWindow();
                     Scene scene = new Scene(parent);
                     stage.setTitle("Login Form");

@@ -12,18 +12,21 @@
    <children>
       <ImageView fitHeight="521.0" fitWidth="532.0">
          <image>
-            <Image url="@../Assets/Pictures/25%20library%20cartoons,%20comic%20strips,%20and%20pictures.jpeg" />
+            <Image url="@../Assets/Pictures/2304.w061.n005.139B.p15.139.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="521.0" fitWidth="532.0">
-
-      </ImageView>
-      <Button layoutX="158.0" layoutY="165.0" mnemonicParsing="false" onAction="#barrowersSec" prefHeight="26.0" prefWidth="171.0" styleClass="signoutBTN" stylesheets="@../Assets/CSS/MainformDesign.css" text="Book Barrowers Section" />
-      <Button layoutX="158.0" layoutY="248.0" mnemonicParsing="false" onAction="#transactionSec" prefHeight="26.0" prefWidth="171.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Transactions" />
-      <Button fx:id="signoutBTN" layoutX="24.0" layoutY="469.0" mnemonicParsing="false" onAction="#signout" prefHeight="26.0" prefWidth="85.0" styleClass="signoutBTN" stylesheets="@../Assets/CSS/design.css" text="Sign out" />
-      <Label layoutX="362.0" layoutY="45.0" prefHeight="17.0" prefWidth="131.0" text="User Form" textFill="#5f37d7">
+      <Button layoutX="149.0" layoutY="111.0" mnemonicParsing="false" onAction="#barrowersSec" prefHeight="94.0" prefWidth="209.0" styleClass="signoutBTN" stylesheets="@../Assets/CSS/MainformDesign.css" text="Book Barrowers Section">
          <font>
-            <Font name="Arial Bold" size="24.0" />
+            <Font name="Cambria" size="13.0" />
+         </font></Button>
+      <Button layoutX="142.0" layoutY="273.0" mnemonicParsing="false" onAction="#transactionSec" prefHeight="94.0" prefWidth="227.0" stylesheets="@../Assets/CSS/MainformDesign.css" text="Transactions">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button fx:id="signoutBTN" layoutX="24.0" layoutY="469.0" mnemonicParsing="false" onAction="#signout" prefHeight="26.0" prefWidth="85.0" styleClass="signoutBTN" stylesheets="@../Assets/CSS/design.css" text="Sign out" textFill="#f8f7f7" />
+      <Label layoutX="162.0" layoutY="23.0" prefHeight="27.0" prefWidth="227.0" text="User Form" textFill="#5f37d7">
+         <font>
+            <Font name="Century" size="40.0" />
          </font>
          <effect>
             <ColorAdjust brightness="-0.29" contrast="1.0" hue="1.0" saturation="1.0" />

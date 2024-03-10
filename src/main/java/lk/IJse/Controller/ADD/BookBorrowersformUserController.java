@@ -191,7 +191,7 @@ public class BookBorrowersformUserController {
         Transaction transaction = session.beginTransaction();
 
         Borrowers borrowers = new Borrowers();
-        User user1 = new User();
+        Admin user1 = new Admin();
 
         String userID = dataDto.userId;
         String branchID = (String) book_branchID.getValue();  // Use getValue to get the selected branch ID
@@ -205,7 +205,7 @@ public class BookBorrowersformUserController {
         Books book = session.get(Books.class, bookID);
 
         borrowers.setBook(book);
-        borrowers.setUser(user1);
+        borrowers.setAdmin(user1);
         borrowers.setBranch(branch);  // Set the branch directly
 
         // Inserting current date and time for borrow date

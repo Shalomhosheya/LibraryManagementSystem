@@ -173,21 +173,29 @@ public class BranchFormController {
         Session session = factoryConfiguration.getInstance().getSessionFactory();
         Transaction transaction = session.beginTransaction();
 
-        Query<String> branchQuery = session.createQuery("select b.branch_ID from Branch b", String.class);
+        try {
+            Query<String> branchQuery = session.createQuery("select b.branchId from Branch b", String.class);
+            List<String> branchIds = branchQuery.getResultList();
 
-        List<String> branchIds = branchQuery.getResultList();
+            if (!branchIds.isEmpty()) {
+                // Assuming you want to use the first branch ID if there are multiple
+                BranchDto.branch_id = branchIds.get(0);
+            } else {
+                // Handle the case where no branch ID is found
+                BranchDto.branch_id = "DefaultBranchID";
+            }
 
-        if (!branchIds.isEmpty()) {
-            // Assuming you want to use the first branch ID if there are multiple
-            BranchDto.branch_id = branchIds.get(0);
-        } else {
-            // Handle the case where no branch ID is found
-            BranchDto.branch_id = "DefaultBranchID";
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
         }
-
-        transaction.commit();
-        session.close();
     }
+
 
 
 

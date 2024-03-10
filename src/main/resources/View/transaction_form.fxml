@@ -9,14 +9,13 @@
 
 <AnchorPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IJse.Controller.Transaction_formController">
    <children>
-      <TableView fx:id="TransTableView" layoutX="50.0" layoutY="53.0" prefHeight="479.0" prefWidth="741.0">
+      <TableView fx:id="TransTableView" layoutX="94.0" layoutY="60.0" prefHeight="479.0" prefWidth="687.0">
         <columns>
-          <TableColumn fx:id="B_IDCol" prefWidth="116.00002670288086" text="BookID" />
-          <TableColumn fx:id="U_IDCol" prefWidth="103.19996643066406" text="Username" />
-            <TableColumn fx:id="B_NameCol" prefWidth="99.2000732421875" text="Title" />
-            <TableColumn fx:id="BranchNameCol" prefWidth="124.0" text="Branch " />
-            <TableColumn fx:id="BorrowD_col" prefWidth="132.0" text="Borrowed Date" />
-            <TableColumn fx:id="H_dateCol" prefWidth="170.4000244140625" text="Handed Date" />
+          <TableColumn fx:id="U_IDCol" prefWidth="118.0" text="Username" />
+            <TableColumn fx:id="B_NameCol" prefWidth="112.0" text="Title" />
+            <TableColumn fx:id="BranchNameCol" prefWidth="112.0" text="Branch " />
+            <TableColumn fx:id="BorrowD_col" prefWidth="157.0" text="Borrowed Date" />
+            <TableColumn fx:id="H_dateCol" prefWidth="187.0" text="Handed Date" />
         </columns>
       </TableView>
       <Button layoutX="22.0" layoutY="546.0" mnemonicParsing="false" onAction="#BacktoMenu" text="Back" />

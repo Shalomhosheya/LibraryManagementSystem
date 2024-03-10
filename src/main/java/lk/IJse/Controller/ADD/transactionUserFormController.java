@@ -17,6 +17,7 @@ import lk.IJse.Module.Branch;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
@@ -46,34 +47,52 @@ public class transactionUserFormController {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query<Borrowers> query = session.createQuery("from Borrowers", Borrowers.class);
-            List<Borrowers> resultList = query.list();
+            NativeQuery<Object[]> query = session.createNativeQuery(
+                    "SELECT b.bookId, b.Bdate, b.HDate, u.name AS userName, bk.title AS bookTitle, br.branchADD AS branchAddress\n" +
+                            "FROM Borrowers b\n" +
+                            "JOIN Admin u ON b.admin_id = u.id\n" +
+                            "JOIN Books bk ON b.book_id = bk.bookId\n" +
+                            "JOIN Branch br ON b.branch_ID = br.branch_ID;\n");
+            List<Object[]> resultList = query.list();
 
-            // Ensure that the list is not null before clearing and updating it
+            for (Object[] result : resultList) {
+                for (Object column : result) {
+                    System.out.print(column + " ");
+                }
+                System.out.println();
+            }
             if (borrowersList == null) {
-                borrowersList = new ArrayList<>();
+                borrowersList = FXCollections.observableArrayList();
             } else {
                 borrowersList.clear();
             }
 
-            // Update the list with the new results
-            borrowersList.addAll(resultList);
+            for (Object[] result : resultList) {
+                Borrowers borrower = new Borrowers();
+                borrower.setBookId((String) result[0]); // Corrected data type
+                borrower.setBdate(((java.sql.Timestamp) result[1]).toLocalDateTime());
+                borrower.setHDate(((java.sql.Timestamp) result[2]).toLocalDateTime());
+                borrower.setUserName((String) result[3]);
+                borrower.setBookTitle((String) result[4]);
+                borrower.setBranchAddress((String) result[5]);
 
-            System.out.println(borrowersList);
+                borrowersList.add(borrower);
+            }
+
 
             transaction.commit();
         } catch (Exception e) {
-            // Handle any exceptions appropriately
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace(); // Log or handle the exception as needed
+            e.printStackTrace();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
     }
+
 
     public void BacktoMenu(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View2/UserMainForm.fxml"));
@@ -98,10 +117,10 @@ public class transactionUserFormController {
         borrowersList = FXCollections.observableArrayList();
         refreshTable();
 
-        B_IDCol.setCellValueFactory(new PropertyValueFactory<>("id")); // Assuming "id" is the property in Borrowers for book_id
-        U_IDCol.setCellValueFactory(new PropertyValueFactory<>("user")); // Assuming "user" is the property in Borrowers for user_id
-        B_NameCol.setCellValueFactory(new PropertyValueFactory<>("book")); // Assuming "book" is the property in Borrowers for book_id
-        BranchNameCol.setCellValueFactory(new PropertyValueFactory<>("branch")); // Assuming "branch" is the property in Borrowers for branch_ID
+//        B_IDCol.setCellValueFactory(new PropertyValueFactory<>("id")); // Assuming "id" is the property in Borrowers for book_id
+        U_IDCol.setCellValueFactory(new PropertyValueFactory<>("userName")); // Assuming "user" is the property in Borrowers for user_id
+        B_NameCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle")); // Assuming "book" is the property in Borrowers for book_id
+        BranchNameCol.setCellValueFactory(new PropertyValueFactory<>("branchAddress")); // Assuming "branch" is the property in Borrowers for branch_ID
         BorrowD_col.setCellValueFactory(new PropertyValueFactory<>("Bdate"));
         H_dateCol.setCellValueFactory(new PropertyValueFactory<>("HDate"));
 

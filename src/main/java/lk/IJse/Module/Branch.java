@@ -1,12 +1,15 @@
 package lk.IJse.Module;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class Branch {
     @Id
-    private String branch_ID;
+    @Column(name = "branch_ID")
+    private String branchId;
+
     private String branchADD;
     private int BooksQuantity;
     private String status;
@@ -15,11 +18,11 @@ public class Branch {
     }
 
     public String getBranch_ID() {
-        return branch_ID;
+        return branchId;
     }
 
     public void setBranch_ID(String branch_ID) {
-        this.branch_ID = branch_ID;
+        this.branchId = branch_ID;
     }
 
     public String getBranchADD() {
