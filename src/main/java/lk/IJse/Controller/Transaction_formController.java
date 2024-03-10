@@ -19,8 +19,10 @@ import lk.IJse.Module.FactoryConfig.factoryConfiguration;
 import lk.IJse.Module.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.awt.print.Book;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,7 +102,7 @@ public class Transaction_formController {
     public void initialize() {
         borrowersList = FXCollections.observableArrayList();
         refreshTable();
-
+//     dataSet();
         B_IDCol.setCellValueFactory(new PropertyValueFactory<>("id")); // Assuming "id" is the property in Borrowers for book_id
         U_IDCol.setCellValueFactory(new PropertyValueFactory<>("user")); // Assuming "user" is the property in Borrowers for user_id
         B_NameCol.setCellValueFactory(new PropertyValueFactory<>("book")); // Assuming "book" is the property in Borrowers for book_id
@@ -109,6 +111,24 @@ public class Transaction_formController {
         H_dateCol.setCellValueFactory(new PropertyValueFactory<>("HDate"));
 
         TransTableView.setItems((ObservableList<Borrowers>) borrowersList);
+    }
+
+    private void dataSet() {
+        Session session = factoryConfiguration.getInstance().getSessionFactory();
+        Transaction transaction = session.beginTransaction();
+
+        NativeQuery nativeQuery = session.createNativeQuery("NativeQuery nativeQuery = session.createNativeQuery(\"SELECT * FROM Books \");\n" +
+                "        nativeQuery.addEntity(Books.class);\n" +
+                "        List<Books> books = nativeQuery.getResultList(); ");
+
+        nativeQuery.addEntity(Books.class);
+        List<Books> books = nativeQuery.getResultList();
+
+
+
+        transaction.commit();
+        session.close();
+
     }
 
 }
