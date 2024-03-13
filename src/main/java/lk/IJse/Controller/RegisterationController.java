@@ -95,6 +95,7 @@ public class RegisterationController {
             new Alert(Alert.AlertType.ERROR,"invalid name").show();
             return false;
         }
+
         return idMatch;
     }
     public void initialize() {

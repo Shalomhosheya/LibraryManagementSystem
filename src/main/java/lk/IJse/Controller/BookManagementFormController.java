@@ -19,6 +19,7 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class BookManagementFormController {
 
@@ -41,42 +42,45 @@ public class BookManagementFormController {
 
     public ObservableList<String>status = FXCollections.observableArrayList(Arr);
     public void EnterData(ActionEvent actionEvent) {
-        Session session = factoryConfiguration.getInstance().getSessionFactory();
-        Transaction transaction = session.beginTransaction();
+        boolean check = Regex();
+        if (check) {
+            Session session = factoryConfiguration.getInstance().getSessionFactory();
+            Transaction transaction = session.beginTransaction();
 
-        try {
-            Books books = new Books();
+            try {
+                Books books = new Books();
 
-           String id= books.setBookId(bookid_txt.getText());
-           String title= books.setTitle(title_txt.getText());
-           String name=  books.setAuthorName(author_txt.getText());
-           String genre =books.setGenreType(genretxt.getText());
+                String id = books.setBookId(bookid_txt.getText());
+                String title = books.setTitle(title_txt.getText());
+                String name = books.setAuthorName(author_txt.getText());
+                String genre = books.setGenreType(genretxt.getText());
 
-            String selectedStatus = combo_statusbooks.getValue();
-           String statues= books.setStatus(selectedStatus);
-
-
-            if (!id.isEmpty()&&!title.isEmpty()&&!name.isEmpty()&&!genre.isEmpty()&&!statues.isEmpty()){
-
-                session.save(books);
-                transaction.commit();
+                String selectedStatus = combo_statusbooks.getValue();
+                String statues = books.setStatus(selectedStatus);
 
 
-                // Refresh the TableView after adding a new record
-                refreshTableView();
-                new Alert(Alert.AlertType.INFORMATION,"Data Added").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Some Fields  are Empty").show();
+                if (!id.isEmpty() && !title.isEmpty() && !name.isEmpty() && !genre.isEmpty() && !statues.isEmpty()) {
+
+                    session.save(books);
+                    transaction.commit();
+
+
+                    // Refresh the TableView after adding a new record
+                    refreshTableView();
+                    new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Some Fields  are Empty").show();
+                }
+
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                new Alert(Alert.AlertType.ERROR, "Duplicate ID was Entered").show();
+
+            } finally {
+                session.close();
             }
-
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            new Alert(Alert.AlertType.ERROR,"Duplicate ID was Entered").show();
-
-        } finally {
-            session.close();
         }
     }
 
@@ -176,6 +180,27 @@ public class BookManagementFormController {
         author_txt.clear();
         genretxt.clear();
         combo_statusbooks.setVisibleRowCount(0);
+    }
+    public boolean Regex(){
+        String BookId = bookid_txt.getText();
+        boolean check = Pattern.matches("[B]\\d{3,}",BookId);
+        if (!check) {
+            new Alert(Alert.AlertType.ERROR, "Error in id format...ID must B✖✖✖ ").show();
+            return false;
+        }
+        String title= title_txt.getText();
+        boolean check2 = Pattern.matches("^[\\w\\s]+$", title);
+        if (check2){
+          new Alert(Alert.AlertType.ERROR,"Does not much as a Book Title").show();
+          return false;
+        }
+        String authorname= author_txt.getText();
+        boolean check3=Pattern.matches("",authorname);
+        if (check3){
+            new Alert(Alert.AlertType.ERROR,"Does not seems to be name").show();
+            return false;
+        }
+        return check;
     }
     public void initialize(){
         observableBooksList = FXCollections.observableArrayList();

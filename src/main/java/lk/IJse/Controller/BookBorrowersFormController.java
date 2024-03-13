@@ -22,6 +22,9 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import static javax.print.attribute.standard.MediaSizeName.B;
 
 public class BookBorrowersFormController {
 
@@ -185,58 +188,61 @@ public class BookBorrowersFormController {
         session.close();
     }
     public void Borrow(ActionEvent actionEvent) {
-        Session session = factoryConfiguration.getInstance().getSessionFactory();
-        Transaction transaction = session.beginTransaction();
 
-        Borrowers borrowers = new Borrowers();
-        User user1 = new User();
 
-        String userID = dataDto.userId;
-        String branchID = (String) book_branchID.getValue();  // Use getValue to get the selected branch ID
-        System.out.println(branchID);
+            Session session = factoryConfiguration.getInstance().getSessionFactory();
+            Transaction transaction = session.beginTransaction();
 
-        user1.setId(userID);
-        Branch branch = session.get(Branch.class, branchID);
+            Borrowers borrowers = new Borrowers();
+            User user1 = new User();
 
-        // Assuming book_borrowID_txt contains the book ID, extract its text
-        String bookID = book_borrowID_txt.getText();
-        Books book = session.get(Books.class, bookID);
+            String userID = dataDto.userId;
+            String branchID = (String) book_branchID.getValue();  // Use getValue to get the selected branch ID
+            System.out.println(branchID);
 
-        borrowers.setBook(book);
-        borrowers.setUser(user1);
-        borrowers.setBranch(branch);  // Set the branch directly
+            user1.setId(userID);
+            Branch branch = session.get(Branch.class, branchID);
 
-        // Inserting current date and time for borrow date
-        LocalDateTime borrowDate = LocalDateTime.now();
-        borrowers.setBdate(borrowDate);
+            // Assuming book_borrowID_txt contains the book ID, extract its text
+            String bookID = book_borrowID_txt.getText();
+            Books book = session.get(Books.class, bookID);
 
-        // Inserting current date and time for hand date
-        LocalDateTime handDate = LocalDateTime.now().plusDays(7); // assuming you want to add 7 days
-        borrowers.setHDate(handDate);
+            borrowers.setBook(book);
+            borrowers.setUser(user1);
+            borrowers.setBranch(branch);  // Set the branch directly
 
-        // Check if book_borrowDate and book_HandDate are not null
-        if (book_borrowDate.getValue() != null) {
-            borrowDate = book_borrowDate.getValue().atStartOfDay();
+            // Inserting current date and time for borrow date
+            LocalDateTime borrowDate = LocalDateTime.now();
             borrowers.setBdate(borrowDate);
-        }
 
-        if (book_HandDate.getValue() != null) {
-            handDate = book_HandDate.getValue().atStartOfDay();
+            // Inserting current date and time for hand date
+            LocalDateTime handDate = LocalDateTime.now().plusDays(7); // assuming you want to add 7 days
             borrowers.setHDate(handDate);
-        }
 
-        // Handle other validations if needed
+            // Check if book_borrowDate and book_HandDate are not null
+            if (book_borrowDate.getValue() != null) {
+                borrowDate = book_borrowDate.getValue().atStartOfDay();
+                borrowers.setBdate(borrowDate);
+            }
 
-        if (!userID.isEmpty() && !bookID.isEmpty() && borrowDate != null && handDate != null) {
-            new Alert(Alert.AlertType.INFORMATION, "THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
+            if (book_HandDate.getValue() != null) {
+                handDate = book_HandDate.getValue().atStartOfDay();
+                borrowers.setHDate(handDate);
+            }
 
-            session.save(borrowers);
-            transaction.commit();
-            session.close();
-        } else {
-            System.out.println("Please fill in all the required fields.");
-        }
+            // Handle other validations if needed
+
+            if (!userID.isEmpty() && !bookID.isEmpty() && borrowDate != null && handDate != null) {
+                new Alert(Alert.AlertType.INFORMATION, "THANK YOU FOR BORROWING BOOKS..❌PLEASE RETURN BOOKS ON TIME❌").show();
+
+                session.save(borrowers);
+                transaction.commit();
+                session.close();
+            } else {
+                System.out.println("Please fill in all the required fields.");
+            }
     }
+
 
 
     public void initialize() {
